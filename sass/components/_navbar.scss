@@ -1,0 +1,51 @@
+%flex-layout {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+
+    @include md {
+        flex-direction: row;
+      }
+}
+
+
+@mixin position($position, $top: null, $right: null, $bottom: null, $left: null) {
+    position: $position;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+    z-index: 1;
+  }
+
+  // exemple  @include position(absolute, $top: 1em, $left: 50%);
+.navbar {
+    @include position(static);
+    @extend %flex-layout;
+    padding: $base-padding $base-padding * 2;
+    box-shadow: $base-box-shadow;
+
+    .logo {
+        font-size: $ff-lg;
+    }
+
+    .container {
+        @extend %flex-layout;
+    }
+}
+
+.nav__list {
+    width: 35%;
+    @extend %flex-layout;
+    justify-content: flex-end
+}
+
+@each $key, $val in $colors {
+    .navbar-#{$key} {
+        @extend .navbar;
+        background-color: $val;
+    }
+}
